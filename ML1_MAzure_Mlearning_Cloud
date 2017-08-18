@@ -1,0 +1,21 @@
+def azureml_main(dataframe1):
+    import pandas as pd
+    from sklearn.preprocessing import LabelEncoder
+    from sklearn.cross_validation import train_test_split
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.decomposition import PCA
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import Pipeline
+   
+    df = dataframe1
+    X = df.iloc[:, 2:]
+    y = df.iloc[:, 1]
+    le = LabelEncoder()
+    y = le.fit_transform(y)
+    le.transform(['M', 'B'])
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=1)
+    pipe_lr = Pipeline([('scl', StandardScaler()), ('pca', PCA(n_components=2)), ('clf', LogisticRegression(random_state=1))])
+    pipe_lr.fit(X_train, y_train)
+    a = pipe_lr.score(X_test, y_test)  
+    X = pd.DataFrame({'Test Accuracy': [a]})
+return X,
