@@ -18,4 +18,4 @@ def azureml_main(dataframe1):
     pipe_lr.fit(X_train, y_train)
     a = pipe_lr.score(X_test, y_test)  
     X = pd.DataFrame({'Test Accuracy': [a]})
-return X,
+    return X,
